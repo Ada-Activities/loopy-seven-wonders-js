@@ -96,3 +96,21 @@ In Learn, it was sufficient to write a single promise chain to retrieve the lati
 Because the API has a rate limit, we need to introduce a pause between each request. This was readily accomplished in Python using the `time.sleep` function, which pauses the code execution for a specified number of seconds. Our Python code was synchronous, so the `time.sleep` function was sufficient. In Javascript, making network calls is done asynchronously, so we need to use a different approach to introduce a pause between requests, which will be queued up in promises rather than executed synchronously.
 
 Working in the `src/index.js`, we will start from a single promise chain that retrieves the latitude and longitude of the Great Wall of China, then gradually refactor the code to loop through the wonders and retrieve the latitude and longitude of each wonder in turn, using both raw promises and async/await syntax.
+
+## Solution Notes
+
+Three solutions are provided in the `solutions` directory:
+
+1. `functionalSingleRequest.js`: Not a full solution to the activity, but a starting point that wraps the LocationIQ API call in a function that returns a promise.
+2. `loopyPromise.js`: Uses raw promises and a `wait` helper based on the `setTimeout` function to introduce a pause between requests.
+3. `loopyAsyncAwait.js`: The same solution as `loopyPromise.js`, but using async/await syntax instead of raw promises.
+
+From the project root directory, you can run the solutions using the following commands:
+
+```bash
+$ node --env-file=.env solutions/functionalSingleRequest.js
+$ node --env-file=.env solutions/loopyPromise.js
+$ node --env-file=.env solutions/loopyAsyncAwait.js
+```
+
+The first example will return quickly, but the looping solutions will each take approximately 7 seconds to complete, since we added a 1 second pause between each request to avoid hitting the API rate limit.
