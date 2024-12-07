@@ -1,32 +1,41 @@
-// Use this file as a general scratch pad for running code.
+const axios = require('axios');
 
-// Run in the terminal from the project directory with
-//   node src/index.js
+// Be sure to store your API key in a .env file.
+// The .env.sample file shows the required format.
+// The package.json has been configured to load the .env file
+// when using `npm start`.
+// To run a script other than this `index.js` file, we need to start node
+// from the project root like
+// `node --env-file=.env path/to/script.js`
+// (This will be useful for running the solutions.)
+const API_KEY = process.env.api_key;
 
-// Or as
-//   npm start
+// single location call example
+const placeName = 'Great Wall of China';
 
-// Files other than src/index.js must be run using
-//   node path/to/file.js
+// Endpoint documentation: https://docs.locationiq.com/reference/search
+const BASE_URL = 'https://us1.locationiq.com/v1/search';
 
-// Where `path/to/file.js` represents the path to the file to be run relative to
-// the current working directory.
+// more details about the config structure:
+// https://github.com/axios/axios#request-config
 
-// The `Code Runner` VS Code Extension can be installed to add a Play button for
-// JavaScript code.
+// Make a single API call to retrieve the latitude and longitude of
+// the Great Wall of China. We'll use this to form the basis of our
+// solutions.
 
-// Refer to math.js and math.test.js for an example of a small test.
-// More details will be covered in Unit 3, Tests.
-
-// Run from the terminal with
-//   npm test
-
-// The `Jest` VS Code Extension can be installed so that the tests are detected
-// and appear under the VS Code Testing panel.
-
-// To silence the `.env not found. Continuing without it.` message when using
-// `npm start`, create a `.env` file in the root of the project. Refer to
-// `.env.sample` for details.
-
-// Replace with the code you'd like to run
-console.log('Hello, World!');
+axios
+  .get(BASE_URL, {
+    params: {
+      key: API_KEY,
+      q: placeName,
+      format: 'json',
+    },
+  })
+  .then(response => {
+    const { lat, lon } = response.data[0];
+    console.log({ lat, lon });
+    return;  // as configured, eslint requires a return statement
+  })
+  .catch(error => {
+    console.log(error);
+  });

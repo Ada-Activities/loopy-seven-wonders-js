@@ -1,38 +1,24 @@
-# JavaScript REPL
+# Loopy Seven Wonders Activity
 
-A project providing a basic JavaScript REPL (Read-Eval-Print Loop) for local development.
+An activity to practice building looping promise chains in Javascript.
 
 ## One-Time Setup
 
-1. Ensure that node has been installed as outlined in JavaScript, Cont., Writing JavaScript Locally.
-   
-   ```bash
-   $ brew install node
-   ```
+1. Fork and clone this repository.
 
-2. Fork and clone this project.
+2. In your terminal, navigate to the project directory.
 
-3. In your terminal, navigate to the project directory.
-
-4. Install the project dependencies.
+3. Install the project dependencies.
 
    ```bash
    $ npm install
    ```
 
-## Running the REPL
+## Running the Activity
 
 1. In your terminal, navigate to the project directory.
 
-2. Open the project in VS Code
-
-   ```bash
-   $ code .
-   ```
-
-3. Make edits to the `src/index.js` file.
-
-4. Run the REPL.
+2. Run the activity.
 
   - In the terminal from the project directory, run the following command:
 
@@ -48,8 +34,6 @@ A project providing a basic JavaScript REPL (Read-Eval-Print Loop) for local dev
 
   - Or from VS Code, install the **Code Runner** extension and run the file by clicking the play button in the top right corner of the editor.
 
-5. Repeat steps 3-4 as needed.
-
 ## Syntax Warnings
 
 The project is configured to use ESLint to provide syntax warnings. ESLint can be run from the project directory using the following command:
@@ -60,30 +44,55 @@ $ npm run lint
 
 ESLint warnings can be shown in VS Code by installing the **ESLint** extension.
 
-## Tests
+## Activity Directions
 
-A simple example test is provided in the `src/math.test.js` file, which tests a function defined in `src/math.js`. To run the test, use the following command:
+Use the [LocationIQ's Forward Geocoding API](https://locationiq.com/geocoding). To write code to retrieve the latitude and longitude of the [seven wonders of the New7Wonders of the World](https://en.wikipedia.org/wiki/New7Wonders_of_the_World), which are the following:
 
-```bash
-$ npm test
+| Wonder              |
+| ------------------- |
+| Great Wall of China |
+| Petra               |
+| Colosseum           |
+| Chichen Itza        |
+| Machu Picchu        |
+| Taj Mahal           |
+| Christ the Redeemer |
+
+In Learn, it was sufficient to write a single promise chain to retrieve the latitude and longitude of each wonder, running the code for each wonder one by one. This activity focuses on the extra challenges section of the Learn lesson, which involves writing a single promise chain that retrieves the latitude and longitude of each wonder in a loop., and places the results in a data structure with the following shape:
+
+```js
+{
+    "Great Wall of China": {
+        latitude: "...",
+        longitude: "..."
+    },
+    "Petra": {
+        latitude: "...",
+        longitude: "..."
+    },
+    "Colosseum": {
+        latitude: "...",
+        longitude: "..."
+    },
+    "Chichen Itza": {
+        latitude: "...",
+        longitude: "..."
+    },
+    "Machu Picchu": {
+        latitude: "...",
+        longitude: "..."
+    },
+    "Taj Mahal": {
+        latitude: "...",
+        longitude: "..."
+    },
+    "Christ the Redeemer": {
+        latitude: "...",
+        longitude: "..."
+    }
+}
 ```
 
-Tests can be discovered by VS Code by installing the **Jest** extension.
+Because the API has a rate limit, we need to introduce a pause between each request. This was readily accomplished in Python using the `time.sleep` function, which pauses the code execution for a specified number of seconds. Our Python code was synchronous, so the `time.sleep` function was sufficient. In Javascript, making network calls is done asynchronously, so we need to use a different approach to introduce a pause between requests, which will be queued up in promises rather than executed synchronously.
 
-Tests will be covered in more detail in Unit 3, Tests
-
-## Additional files
-
-Additional files can be added to the `src` directory and then run from the project directory as
-
-```bash
-$ node src/<filename>.js
-```
-
-Generally, we can run a file by using the command
-
-```bash
-$ node path/to/file.js
-```
-
-Where `path/to/file.js` is the path to the file we want to run relative to the current directory.
+Working in the `src/index.js`, we will start from a single promise chain that retrieves the latitude and longitude of the Great Wall of China, then gradually refactor the code to loop through the wonders and retrieve the latitude and longitude of each wonder in turn, using both raw promises and async/await syntax.
