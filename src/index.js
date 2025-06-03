@@ -10,6 +10,12 @@ const axios = require('axios');
 // (This will be useful for running the solutions.)
 const API_KEY = process.env.api_key;
 
+// Alternatively, we can use the `dotenv` package to load the .env file
+// const dotEnv = require('dotenv');
+
+// dotEnv.config(); // Load variables from .env
+// const API_KEY = process.env.API_KEY; // Access the API_KEY from .env file
+
 // single location call example
 const placeName = 'Great Wall of China';
 
