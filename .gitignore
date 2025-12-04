@@ -175,7 +175,6 @@ dist
 .svelte-kit
 
 ### VisualStudioCode ###
-.vscode/*
 
 # Local History for Visual Studio Code
 .history/
