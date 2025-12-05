@@ -1,4 +1,4 @@
-const axios = require('axios');
+import axios from 'axios';
 
 // Be sure to store your API key in a .env file.
 // The .env.sample file shows the required format.
@@ -29,14 +29,13 @@ const BASE_URL = 'https://us1.locationiq.com/v1/search';
 // the Great Wall of China. We'll use this to form the basis of our
 // solutions.
 
-axios
-  .get(BASE_URL, {
-    params: {
-      key: API_KEY,
-      q: placeName,
-      format: 'json',
-    },
-  })
+axios.get(BASE_URL, {
+  params: {
+    key: API_KEY,
+    q: placeName,
+    format: 'json',
+  },
+})
   .then(response => {
     const { lat, lon } = response.data[0];
     console.log({ lat, lon });
