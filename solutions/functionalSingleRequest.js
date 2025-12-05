@@ -1,4 +1,4 @@
-const axios = require('axios');
+import axios from 'axios';
 
 // Be sure to store your API key in a .env file.
 // The .env.sample file shows the required format.
